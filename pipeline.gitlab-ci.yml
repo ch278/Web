@@ -1,0 +1,16 @@
+image: alpine:latest
+
+stages:
+  - deploy
+
+pages:
+  stage: deploy
+  script:
+    - rm -rf public
+    - mkdir public
+    - find . -maxdepth 1 -mindepth 1 ! -name public -exec cp -r {} public/ \;
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
